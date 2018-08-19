@@ -1,7 +1,7 @@
-<h1 align="center">Insight-api</h1>
+<h1 align="center">insight-mue-api</h1>
 
 <div align="center">
-  <strong>A Dash blockchain REST and WebSocket API Service</strong>
+  <strong>A $MUE blockchain REST and WebSocket API Service</strong>
 </div>
 <br />
 <div align="center">
@@ -11,17 +11,17 @@
       alt="API stability" />
   </a>
   <!-- Build Status -->
-  <a href="https://travis-ci.org/dashevo/insight-api">
-    <img src="https://img.shields.io/travis/dashevo/insight-api/master.svg?style=flat-square" alt="Build Status" />
+  <a href="https://travis-ci.org/sotblad/insight-mue-api">
+    <img src="https://img.shields.io/travis/sotblad/insight-mue-api/master.svg?style=flat-square" alt="Build Status" />
   </a>
   <!-- NPM version -->
-  <a href="https://npmjs.org/package/@dashevo/insight-api">
-    <img src="https://img.shields.io/npm/v/@dashevo/insight-api.svg?style=flat-square" alt="NPM version" />
+  <a href="https://npmjs.org/package/insight-mue-api">
+    <img src="https://img.shields.io/npm/v/insight-mue-api.svg?style=flat-square" alt="NPM version" />
   </a>
 </div>
 
 
-This is a backend-only service. If you're looking for the web frontend application, take a look at https://github.com/dashevo/insight-ui.
+This is a backend-only service. If you're looking for the web frontend application, take a look at https://github.com/sotblad/insight-mue-ui.
 
 ## Table of Content
 - [Getting Started](#getting-started)
@@ -43,15 +43,8 @@ This is a backend-only service. If you're looking for the web frontend applicati
     - [Transactions for Multiple Addresses](#transactions-for-multiple-addresses)
     - [Transaction Broadcasting](#transaction-broadcasting)
     - [Sporks List](#sporks-list)
-    - [Proposals Informations](#proposals-informations)
-    - [Proposals Count](#proposals-count)
     - [Budget Proposal List](#budget-proposal-list)
-    - [Budget Triggers List](#budget-triggers-list)
     - [Budget Proposal Detail](#budget-proposal-detail)
-    - [Proposal Check](#proposal-check)
-    - [Proposal Deserialization](#proposal-deserialization)
-    - [Proposal Current Votes](#proposal-current-votes)
-    - [Governance Budget](#governance-budget)
     - [Masternodes List](#masternodes-list)
     - [Historic Blockchain Data Sync Status](#historic-blockchain-data-sync-status)
     - [Live Network P2P Data Sync Status](#live-network-p2p-data-sync-status)
@@ -62,25 +55,25 @@ This is a backend-only service. If you're looking for the web frontend applicati
 - [Notes on Upgrading from v0.3](#notes-on-upgrading-from-v03)
 - [Notes on Upgrading from v0.2](#notes-on-upgrading-from-v02)
 - [Resources](#resources)
-- [License](https://github.com/dashevo/insight-api-dash/blob/master/LICENSE)
+- [License](https://github.com/sotblad/insight-mue-api/blob/master/LICENSE)
 
 ## Getting Started
 
 ```bashl
-npm install -g dashcore-node@latest
-bitcore-node-dash create mynode
+npm install -g bitcore-node-mue@latest
+bitcore-node-mue create mynode
 cd mynode
-dashcore-node install insight-api
-dashcore-node start
+bitcore-node-mue install insight-mue-api
+bitcore-node-mue start
 ```
 
-The API endpoints will be available by default at: `http://localhost:3001/insight-api/`
+The API endpoints will be available by default at: `http://localhost:3001/insight-mue-api/`
 
 ### Prerequisites
 
-- [Bitcore Node Dash 3.x](https://github.com/dashevo/dashcore-node)
+- [Bitcore Node $MUE 3.x](https://github.com/sotblad/bitcore-node-mue)
 
-**Note:** You can use an existing Dash data directory, however `txindex`, `addressindex`, `timestampindex` and `spentindex` needs to be set to true in `dash.conf`, as well as a few other additional fields.
+**Note:** You can use an existing $MUE data directory, however `txindex`, `addressindex`, `timestampindex` and `spentindex` needs to be set to true in `mue.conf`, as well as a few other additional fields.
 
 ### Query Rate Limit
 
@@ -94,7 +87,7 @@ To protect the server, insight-api has a built it query rate limiter. It can be 
     }
   }
 ```
-With all the configuration options available: https://github.com/dashevo/insight-api/blob/master/lib/ratelimiter.js#L10-17
+With all the configuration options available: https://github.com/bitpay/insight-api/blob/master/lib/ratelimiter.js#L10-17
 
 Or disabled entirely with:
 ``` json
@@ -104,21 +97,21 @@ Or disabled entirely with:
     }
   }
   ```
-
+  
 
 ## API HTTP Endpoints
 
 ### Block
 ```
-  /insight-api-dash/block/[:hash]
-  /insight-api-dash/block/0000000006e7b38e8ab2d351239019c01de9a148b5baef58cfe52dfd9917cedc
+  /insight-mue-api/block/[:hash]
+  /insight-mue-api/block/0000000006e7b38e8ab2d351239019c01de9a148b5baef58cfe52dfd9917cedc
 ```
 
 ### Block Index
 Get block hash by height
 ```
-  /insight-api-dash/block-index/[:height]
-  /insight-api-dash/block-index/0
+  /insight-mue-api/block-index/[:height]
+  /insight-mue-api/block-index/0
 ```
 This would return:
 ```
@@ -131,7 +124,7 @@ which is the hash of the TestNet Genesis block (0 height)
 
 ### Raw Block
 ```
-  /insight-api-dash/rawblock/[:blockHash]
+  /insight-mue-api/rawblock/[:blockHash]
 ```
 
 This would return:
@@ -145,7 +138,7 @@ This would return:
 
 Get block summaries by date:
 ```
-  /insight-api-dash/blocks?limit=3&blockDate=2017-04-22
+  /insight-mue-api/blocks?limit=3&blockDate=2017-04-22
 ```
 
 Example response:
@@ -179,31 +172,31 @@ Example response:
 
 ### Transaction
 ```
-  /insight-api-dash/tx/[:txid]
-  /insight-api-dash/tx/ebdca263fe1c75c8609ce8fe3d82a320a0b3ca840f4df995883f5dab1b9ff8d9
-  /insight-api-dash/rawtx/[:rawid]
-  /insight-api-dash/rawtx/ebdca263fe1c75c8609ce8fe3d82a320a0b3ca840f4df995883f5dab1b9ff8d9
+  /insight-mue-api/tx/[:txid]
+  /insight-mue-api/tx/ebdca263fe1c75c8609ce8fe3d82a320a0b3ca840f4df995883f5dab1b9ff8d9
+  /insight-mue-api/rawtx/[:rawid]
+  /insight-mue-api/rawtx/ebdca263fe1c75c8609ce8fe3d82a320a0b3ca840f4df995883f5dab1b9ff8d9
 ```
 
 ### Address
 ```
-  /insight-api-dash/addr/[:addr][?noTxList=1][&from=&to=]
-  /insight-api-dash/addr/ybi3gej7Ea1MysEYLR7UMs3rMuLJH5aVsW?noTxList=1
-  /insight-api-dash/addr/yPv7h2i8v3dJjfSH4L3x91JSJszjdbsJJA?from=1000&to=2000
+  /insight-mue-api/addr/[:addr][?noTxList=1][&from=&to=]
+  /insight-mue-api/addr/ybi3gej7Ea1MysEYLR7UMs3rMuLJH5aVsW?noTxList=1
+  /insight-mue-api/addr/yPv7h2i8v3dJjfSH4L3x91JSJszjdbsJJA?from=1000&to=2000
 ```
 
 ### Address Properties
 ```
-  /insight-api-dash/addr/[:addr]/balance
-  /insight-api-dash/addr/[:addr]/totalReceived
-  /insight-api-dash/addr/[:addr]/totalSent
-  /insight-api-dash/addr/[:addr]/unconfirmedBalance
+  /insight-mue-api/addr/[:addr]/balance
+  /insight-mue-api/addr/[:addr]/totalReceived
+  /insight-mue-api/addr/[:addr]/totalSent
+  /insight-mue-api/addr/[:addr]/unconfirmedBalance
 ```
 The response contains the value in Satoshis.
 
 ### Unspent Outputs
 ```
-  /insight-api-dash/addr/[:addr]/utxo
+  /insight-mue-api/addr/[:addr]/utxo
 ```
 Sample return:
 ```
@@ -224,13 +217,13 @@ Sample return:
 ### Unspent Outputs for Multiple Addresses
 GET method:
 ```
-  /insight-api-dash/addrs/[:addrs]/utxo
-  /insight-api-dash/addrs/ygwNQgE5f15Ygopbs2KPRYMS4TcffqBpsz,ygw5yCtVkx3hREke4L8qDqQtnNoAiPKTSx/utxo
+  /insight-mue-api/addrs/[:addrs]/utxo
+  /insight-mue-api/addrs/ygwNQgE5f15Ygopbs2KPRYMS4TcffqBpsz,ygw5yCtVkx3hREke4L8qDqQtnNoAiPKTSx/utxo
 ```
 
 POST method:
 ```
-  /insight-api-dash/addrs/utxo
+  /insight-mue-api/addrs/utxo
 ```
 
 POST params:
@@ -264,25 +257,25 @@ Sample output:
 
 ### Transactions by Block
 ```
-  /insight-api-dash/txs/?block=HASH
-  /insight-api-dash/txs/?block=000000000814dd7cf470bd835334ea6624ebf0291ea857a5ab37c65592726375
+  /insight-mue-api/txs/?block=HASH
+  /insight-mue-api/txs/?block=000000000814dd7cf470bd835334ea6624ebf0291ea857a5ab37c65592726375
 ```
 ### Transactions by Address
 ```
-  /insight-api-dash/txs/?address=ADDR
-  /insight-api-dash/txs/?address=yWFfdp9nLUjy1kJczFhRuBMUjtTkTTiyMv
+  /insight-mue-api/txs/?address=ADDR
+  /insight-mue-api/txs/?address=yWFfdp9nLUjy1kJczFhRuBMUjtTkTTiyMv
 ```
 
 ### Transactions for Multiple Addresses
 GET method:
 ```
-  /insight-api-dash/addrs/[:addrs]/txs[?from=&to=]
-  /insight-api-dash/addrs/ygwNQgE5f15Ygopbs2KPRYMS4TcffqBpsz,ygw5yCtVkx3hREke4L8qDqQtnNoAiPKTSx/txs?from=0&to=20
+  /insight-mue-api/addrs/[:addrs]/txs[?from=&to=]
+  /insight-mue-api/addrs/ygwNQgE5f15Ygopbs2KPRYMS4TcffqBpsz,ygw5yCtVkx3hREke4L8qDqQtnNoAiPKTSx/txs?from=0&to=20
 ```
 
 POST method:
 ```
-  /insight-api-dash/addrs/txs
+  /insight-mue-api/addrs/txs
 ```
 
 POST params:
@@ -328,10 +321,10 @@ Note: if pagination params are not specified, the result is an array of transact
 
 ### Transaction Broadcasting
 
-#### Standard transaction
+#### Standard transaction 
 POST method:
 ```
-  /insight-api-dash/tx/send
+  /insight-mue-api/tx/send
 ```
 POST params:
 ```
@@ -355,16 +348,16 @@ POST response:
   }
 ```
 
-#### InstantSend transaction
+#### InstantSend transaction 
 
-Conditions :
-* Every inputs should have 6 confirmations.
-* Fee are 0.001 per input.
+Conditions :   
+* Every inputs should have 6 confirmations.  
+* Fee are 0.001 per input.  
 * Transaction value should be below SPORK_5_INSTANTSEND_MAX_VALUE (see spork route)
 
 POST method:
 ```
-  /insight-api-dash/tx/sendix
+  /insight-mue-api/tx/sendix
 ```
 POST params:
 ```
@@ -377,13 +370,13 @@ POST response:
   }
 ```
 
-### Sporks List
-GET method:
+### Sporks List 
+GET method: 
 ```
-  /insight-api-dash/sporks
+  /insight-mue-api/sporks
 ```
 
-Sample output:
+Sample output: 
 ```
 {"sporks":
     {
@@ -400,50 +393,10 @@ Sample output:
 }
 ```
 
-### Proposals Informations
-GET method:
-```
-  /insight-api-dash/gobject/info
-```
-
-Sample output:
-```
-{
-  "result":{
-    "governanceminquorum":1,
-    "masternodewatchdogmaxseconds":7200,
-    "proposalfee":5,
-    "superblockcycle":24,
-    "lastsuperblock":79800,
-    "nextsuperblock":79824,
-    "maxgovobjdatasize":16384
-  },
-  "error":null,
-  "id":68537
-}
-```
-
-### Proposals Count
-GET method:
-```
-  /insight-api-dash/gobject/count
-```
-
-Sample output:
-```
-{
-  "result":"Governance Objects: 47 (Proposals: 7, Triggers: 40, Watchdogs: 0/0, Other: 0; Erased: 0), Votes: 1883",
-  "error":null,
-  "id":47025
-}
-```
-
-
-
 ### Budget Proposal List
 GET method:
 ```
-  /insight-api-dash/gobject/list/proposal (or /insight-api-dash/gobject/list)
+  /insight-mue-api/gobject/list/proposal
 ```
 
 Sample output:
@@ -456,7 +409,7 @@ Sample output:
           payment_amount: 5,
           start_epoch: 1482105600,
           type: 1,
-          url: 'https://www.dash.org'
+          url: 'https://www.monetaryunit.org'
         },
         AbsoluteYesCount: 40,
         YesCount: 40,
@@ -464,33 +417,11 @@ Sample output:
         AbstainCount: 0 } ]
 ```
 
-
-
-### Budget Triggers List
-GET method:
-```
-  /insight-api-dash/gobject/list/trigger
-```
-
-Sample output:
-```
-[
-  {
-    "Hash":"fa2a7505c52438b2ca3d14def1c2cdcb59d7ccca417920182f04fcb9be968f00",
-    "DataObject":{"type":2},
-    "AbsoluteYesCount":53,
-    "YesCount":53,
-    "NoCount":0,
-    "AbstainCount":0
-  }
-]
-```
-
 ### Budget Proposal Detail
 GET method:
 ```
-  /insight-api-dash/gobject/get/[:hash]
-  /insight-api-dash/gobject/get/b6af3e70c686f660541a77bc035df2e5e46841020699ce3ec8fad786f7d1aa35
+  /insight-mue-api/gobject/get/[:hash]
+  /insight-mue-api/gobject/get/b6af3e70c686f660541a77bc035df2e5e46841020699ce3ec8fad786f7d1aa35
 ```
 
 Sample output:
@@ -505,7 +436,7 @@ Sample output:
           payment_amount: 5,
           start_epoch: 1482105600,
           type: 1,
-          url: 'https://www.dash.org'
+          url: 'https://www.monetaryunit.org'
         },
         CreationTime: 1482223714,
         FundingResult: {
@@ -534,105 +465,14 @@ Sample output:
         } } ]
 ```
 
-### Proposal Check
-
-GET method:
-```
-  /insight-api-dash/gobject/check/[:hexData]
-  /insight-api-dash/gobject/check/5b5b2270726f706f736[..]
-```
-
-Sample output:
-```
-    {"Object status":"OK"}
-```
-
-### Proposal Deserialization
-
-GET method:
-```
-  /insight-api-dash/gobject/deserialize/[:hexData]
-  /insight-api-dash/gobject/deserialize/5b5b2270726f706f736[..]
-```
-
-Sample output:
-```
-{
-  "result":"[[\"proposal\",{\"end_epoch\":1519848619,\"name\":\"ghijklmnopqrstuvwxyz01234567891519097947\",\"payment_address\":\"yik5HAgVAgjH1oZKjcDfvcf22bwBNbSYzB\",\"payment_amount\":10,\"start_epoch\":1519097947,\"type\":1,\"url\":\"https://www.dashcentral.org/p/test_proposal_1519097947\"}]]",
-  "error":null,
-  "id":78637
-}
-```
-
-### Proposal Current Votes
-
-GET method:
-```
-  /insight-api-dash/gobject/votes/current/[:hash]
-  /insight-api-dash/gobject/votes/current/fbda8cdc1f48917f53b7d63fbce81c85d6dedd3d0e476e979926dfd154b84034
-```
-
-Sample output:
-```
-{
-  "result":"[[\"proposal\",{\"end_epoch\":1519848619,\"name\":\"ghijklmnopqrstuvwxyz01234567891519097947\",\"payment_address\":\"yik5HAgVAgjH1oZKjcDfvcf22bwBNbSYzB\",\"payment_amount\":10,\"start_epoch\":1519097947,\"type\":1,\"url\":\"https://www.dashcentral.org/p/test_proposal_1519097947\"}]]",
-  "error":null,
-  "id":78637
-}
-```
-
-### Governance Budget
-
-GET method:
-```
-  /insight-api-dash/governance/budget/[:blockIndex]
-  /insight-api-dash/governance/budget/79872
-```
-
-Sample output:
-```
-{
-    "result":"60.00",
-    "error":null,
-    "id":75619
-}
-```
-
-### Submit Proposal
-
-POST method:
-```
-  /insight-api-dash/gobject/submit
-```
-
-Exemple input :
-```
-{
-  "parentHash":"abc",
-  "revision":1,
-  "time":10009,
-  "dataHex":"abc",
-  "feeTxId":"abc"
-}
-```
-
-Sample output:
-```
-{
-    "result":"60.00",
-    "error":null,
-    "id":75619
-}
-```
-
 ### Masternodes List
 ```
-  /insight-api-dash/masternodes/list
+  /insight-mue-api/masternodes/list
 ```
 ### Validate Masternode
 ```
-  /insight-api-dash/masternodes/validate/[:payee]
-  /insight-api-dash/masternodes/validate/yRuALkPpeYpTgxdNn2L5YgGktASJYDYPAo
+  /insight-mue-api/masternodes/validate/[:payee]
+  /insight-mue-api/masternodes/validate/yRuALkPpeYpTgxdNn2L5YgGktASJYDYPAo
 ```
 
 Sample valid output:
@@ -652,17 +492,17 @@ Sample valid output:
 
 ### Historic Blockchain Data Sync Status
 ```
-  /insight-api-dash/sync
+  /insight-mue-api/sync
 ```
 
 ### Live Network P2P Data Sync Status
 ```
-  /insight-api-dash/peer
+  /insight-mue-api/peer
 ```
 
 ### Status of the Bitcoin Network
 ```
-  /insight-api-dash/status?q=xxx
+  /insight-mue-api/status?q=xxx
 ```
 
 Where "xxx" can be:
@@ -675,7 +515,7 @@ Where "xxx" can be:
 
 ### Utility Methods
 ```
-  /insight-api-dash/utils/estimatefee[?nbBlocks=2]
+  /insight-mue-api/utils/estimatefee[?nbBlocks=2]
 ```
 
 ## Web Socket API
@@ -808,8 +648,8 @@ There are a few changes to the `GET` endpoint for `/addr/[:address]`:
 
 Some additional general notes:
 - The transaction history for an address will be sorted in block order
-- The response for the `/sync` endpoint does not include `startTs` and `endTs` as the sync is no longer relevant as indexes are built in dashd.
-- The endpoint for `/peer` is no longer relevant connection to dashd is via ZMQ.
+- The response for the `/sync` endpoint does not include `startTs` and `endTs` as the sync is no longer relevant as indexes are built in bitcoind.
+- The endpoint for `/peer` is no longer relevant connection to bitcoind is via ZMQ.
 - `/tx` endpoint results will now include block height, and spentTx related fields will be set to `null` if unspent.
 - `/block` endpoint results does not include `confirmations` and will include `poolInfo`.
 
@@ -828,7 +668,7 @@ The `/tx/<txid>` endpoint JSON response will not include the following fields on
 object.
 - `spentTs`
 
-The `/status?q=getTxOutSetInfo` method has also been removed due to the query being very slow and locking dashd.
+The `/status?q=getTxOutSetInfo` method has also been removed due to the query being very slow and locking bitcoind.
 
 Plug-in support for Insight API is also no longer available, as well as the endpoints:
 - `/email/retrieve`
@@ -838,4 +678,4 @@ Caching support has not yet been added in the v0.3 upgrade.
 
 ## Resources
 
-- (Medium)[How to setup a Dash Instant-Send Transaction using Insight API?????????The comprehensive way](https://medium.com/@obusco/setup-instant-send-transaction-the-comprehensive-way-a80a8a0572e)
+- (Medium)[How to setup a $MUE Instant-Send Transaction using Insight API?????????The comprehensive way](https://medium.com/@obusco/setup-instant-send-transaction-the-comprehensive-way-a80a8a0572e)
