@@ -1,8 +1,8 @@
 {
-  "name": "@dashevo/insight-api",
-  "description": "A Dash blockchain REST and web socket API service for Dashcore Node.",
+  "name": "insight-api-mue",
+  "description": "A MonetaryUnit blockchain REST and web socket API service for Muecore Node.",
   "version": "1.0.1",
-  "repository": "git://github.com/dashevo/insight-api.git",
+  "repository": "git://github.com/sotblad/insight-api-mue.git",
   "contributors": [
     {
       "name": "Gustavo Cortez",
@@ -38,19 +38,19 @@
     }
   ],
   "bugs": {
-    "url": "https://github.com/dashevo/insight-api/issues"
+    "url": "https://github.com/sotblad/insight-api-mue/issues"
   },
-  "homepage": "https://github.com/dashevo/insight-api",
+  "homepage": "https://github.com/sotblad/insight-api-mue",
   "license": "MIT",
   "keywords": [
     "insight",
     "insight api",
     "blockchain",
-    "dash api",
+    "monetaryunit api",
     "blockchain api",
     "json",
-    "bitcore-dash",
-    "dashcore"
+    "bitcore-mue",
+    "muecore"
   ],
   "engines": {
     "node": ">=0.12.0"
@@ -59,10 +59,10 @@
     "test": "NODE_ENV=test mocha -R spec --recursive"
   },
   "main": "lib",
-  "dashcoreNode": "lib",
+  "bitcoreNode": "lib",
   "dependencies": {
     "async": "*",
-    "@dashevo/dashcore-lib": "^0.15.5",
+    "bitcore-lib-mue": "muecoin/bitcore-lib-mue",
     "body-parser": "^1.13.3",
     "compression": "^1.6.1",
     "lodash": "=4.17.1",
