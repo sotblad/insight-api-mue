@@ -3,16 +3,16 @@
 var should = require('should');
 var sinon = require('sinon');
 var MessagesController = require('../lib/messages');
-var dashcore = require('@dashevo/dashcore-lib');
+var bitcore = require('bitcore-lib-mue');
 var _ = require('lodash');
 
 describe('Messages', function() {
 
-  var privateKey = dashcore.PrivateKey.fromWIF('cQwApHAg8hw9AZuxiU4a7g9kFWdaemhPxVZXWiAKgJTx6dPP32fN');
-  var address = 'yYjwsLsPUmsfe3RJ5YqZdJYC2Y9tzHYMWL';
-  var badAddress = 'yYjwsLsPUmsfe3RJ5YqZdJYC2Y9tzHYMWW';
-  var signature = 'H2TSaZyMt9/oLqqgQzE2iBKNlPVfPp6XOVP7LiNDFU3sdiHahS+aemajhhp4XDaRClee/hlUkJtF0Nuqm3egpPw=';
-  var message = 'cellar door';
+  var privateKey = bitcore.PrivateKey.fromWIF('KgJ2MtbWfnm863aR9PhQkNyraVbgoEwGZrmsV7uKEioZycmSF1Xi');
+  var address = '7XCv517xY6KpQ3pQzAjZf28UqBcRA4GjfF';
+  var badAddress = '7RLkrBQ7LdJugWAotcu1VbwEYErDzVajSc';
+  var signature = 'HBs9E60p/7oMKQw3x8lLZIq6MuQp84V8yUkDNiP09yDgFfQLbGQ7ZBbzX+mw9tL2krI/ynSTkFaV5rt5DC+dUyI=';
+  var message = 'hello, world';
 
   it('will verify a message (true)', function(done) {
 
