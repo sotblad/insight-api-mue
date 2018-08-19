@@ -11,12 +11,12 @@
       alt="API stability" />
   </a>
   <!-- Build Status -->
-  <a href="https://travis-ci.org/sotblad/insight-mue-api">
-    <img src="https://img.shields.io/travis/sotblad/insight-mue-api/master.svg?style=flat-square" alt="Build Status" />
+  <a href="https://travis-ci.org/sotblad/insight-api-mue">
+    <img src="https://img.shields.io/travis/sotblad/insight-api-mue/master.svg?style=flat-square" alt="Build Status" />
   </a>
   <!-- NPM version -->
-  <a href="https://npmjs.org/package/insight-mue-api">
-    <img src="https://img.shields.io/npm/v/insight-mue-api.svg?style=flat-square" alt="NPM version" />
+  <a href="https://npmjs.org/package/insight-api-mue">
+    <img src="https://img.shields.io/npm/v/insight-api-mue.svg?style=flat-square" alt="NPM version" />
   </a>
 </div>
 
@@ -55,7 +55,7 @@ This is a backend-only service. If you're looking for the web frontend applicati
 - [Notes on Upgrading from v0.3](#notes-on-upgrading-from-v03)
 - [Notes on Upgrading from v0.2](#notes-on-upgrading-from-v02)
 - [Resources](#resources)
-- [License](https://github.com/sotblad/insight-mue-api/blob/master/LICENSE)
+- [License](https://github.com/sotblad/insight-api-mue/blob/master/LICENSE)
 
 ## Getting Started
 
@@ -63,11 +63,11 @@ This is a backend-only service. If you're looking for the web frontend applicati
 npm install -g bitcore-node-mue@latest
 bitcore-node-mue create mynode
 cd mynode
-bitcore-node-mue install insight-mue-api
+bitcore-node-mue install insight-api-mue
 bitcore-node-mue start
 ```
 
-The API endpoints will be available by default at: `http://localhost:3001/insight-mue-api/`
+The API endpoints will be available by default at: `http://localhost:3001/insight-api-mue/`
 
 ### Prerequisites
 
@@ -103,15 +103,15 @@ Or disabled entirely with:
 
 ### Block
 ```
-  /insight-mue-api/block/[:hash]
-  /insight-mue-api/block/0000000006e7b38e8ab2d351239019c01de9a148b5baef58cfe52dfd9917cedc
+  /insight-api-mue/block/[:hash]
+  /insight-api-mue/block/0000000006e7b38e8ab2d351239019c01de9a148b5baef58cfe52dfd9917cedc
 ```
 
 ### Block Index
 Get block hash by height
 ```
-  /insight-mue-api/block-index/[:height]
-  /insight-mue-api/block-index/0
+  /insight-api-mue/block-index/[:height]
+  /insight-api-mue/block-index/0
 ```
 This would return:
 ```
@@ -124,7 +124,7 @@ which is the hash of the TestNet Genesis block (0 height)
 
 ### Raw Block
 ```
-  /insight-mue-api/rawblock/[:blockHash]
+  /insight-api-mue/rawblock/[:blockHash]
 ```
 
 This would return:
@@ -138,7 +138,7 @@ This would return:
 
 Get block summaries by date:
 ```
-  /insight-mue-api/blocks?limit=3&blockDate=2017-04-22
+  /insight-api-mue/blocks?limit=3&blockDate=2017-04-22
 ```
 
 Example response:
@@ -172,24 +172,24 @@ Example response:
 
 ### Transaction
 ```
-  /insight-mue-api/tx/[:txid]
-  /insight-mue-api/tx/ebdca263fe1c75c8609ce8fe3d82a320a0b3ca840f4df995883f5dab1b9ff8d9
-  /insight-mue-api/rawtx/[:rawid]
-  /insight-mue-api/rawtx/ebdca263fe1c75c8609ce8fe3d82a320a0b3ca840f4df995883f5dab1b9ff8d9
+  /insight-api-mue/tx/[:txid]
+  /insight-api-mue/tx/ebdca263fe1c75c8609ce8fe3d82a320a0b3ca840f4df995883f5dab1b9ff8d9
+  /insight-api-mue/rawtx/[:rawid]
+  /insight-api-mue/rawtx/ebdca263fe1c75c8609ce8fe3d82a320a0b3ca840f4df995883f5dab1b9ff8d9
 ```
 
 ### Address
 ```
-  /insight-mue-api/addr/[:addr][?noTxList=1][&from=&to=]
-  /insight-mue-api/addr/ybi3gej7Ea1MysEYLR7UMs3rMuLJH5aVsW?noTxList=1
-  /insight-mue-api/addr/yPv7h2i8v3dJjfSH4L3x91JSJszjdbsJJA?from=1000&to=2000
+  /insight-api-mue/addr/[:addr][?noTxList=1][&from=&to=]
+  /insight-api-mue/addr/ybi3gej7Ea1MysEYLR7UMs3rMuLJH5aVsW?noTxList=1
+  /insight-api-mue/addr/yPv7h2i8v3dJjfSH4L3x91JSJszjdbsJJA?from=1000&to=2000
 ```
 
 ### Address Properties
 ```
-  /insight-mue-api/addr/[:addr]/balance
-  /insight-mue-api/addr/[:addr]/totalReceived
-  /insight-mue-api/addr/[:addr]/totalSent
+  /insight-api-mue/addr/[:addr]/balance
+  /insight-api-mue/addr/[:addr]/totalReceived
+  /insight-api-mue/addr/[:addr]/totalSent
   /insight-mue-api/addr/[:addr]/unconfirmedBalance
 ```
 The response contains the value in Satoshis.
