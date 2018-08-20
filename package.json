@@ -62,7 +62,7 @@
   "bitcoreNode": "lib",
   "dependencies": {
     "async": "*",
-    "bitcore-lib-mue": "muecoin/bitcore-lib-mue",
+    "bitcore-lib-mue": "git+https://github.com/muecoin/bitcore-lib-mue.git",
     "body-parser": "^1.13.3",
     "compression": "^1.6.1",
     "lodash": "=4.17.1",
